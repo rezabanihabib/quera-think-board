@@ -1,7 +1,7 @@
 const Header = () => {
   return (
-    <header>
-      <h1>Think Board</h1>
+    <header className="bg-base-300 py-4 px-5">
+      <h1 className="font-black">Think Board</h1>
     </header>
   );
 };
