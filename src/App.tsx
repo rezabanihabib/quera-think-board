@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { axiosInstance } from "./lib/axios";
 import type { Note } from "./types/note.type";
 import type { Response } from "./types/response.type";
+import NoteForm from "./components/notes/NoteForm";
 
 function App() {
   const [notes, setNotes] = useState<Note[]>([]);
@@ -33,6 +34,7 @@ function App() {
       <Header />
       <main>
         <Container>
+          <NoteForm />
           <NoteList notes={notes} />
         </Container>
       </main>
