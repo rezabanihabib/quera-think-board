@@ -6,7 +6,7 @@ import { LoaderCircle } from "lucide-react";
 
 interface NoteFormProps {
   note?: Note | null;
-  onSuccess?: () => void;
+  onSuccess?: (note: Note) => void;
 }
 
 const NoteForm: FC<NoteFormProps> = ({ note, onSuccess }) => {
@@ -16,20 +16,23 @@ const NoteForm: FC<NoteFormProps> = ({ note, onSuccess }) => {
   });
   const [isSubmitingForm, setIsSubmitingForm] = useState<boolean>(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitingForm(true);
 
     try {
+      let savedNote: Note;
       if (note) {
-        await axiosInstance.put(`api/notes/${note.id}`, formValues);
+        const res = await axiosInstance.put(`api/notes/${note.id}`, formValues);
+        savedNote = res.data.response;
       } else {
-        await axiosInstance.post("api/notes", formValues);
+        const res = await axiosInstance.post("api/notes", formValues);
+        savedNote = res.data.response;
       }
 
       setFormValues({ title: "", content: "" });
 
-      onSuccess?.();
+      onSuccess?.(savedNote);
     } catch (error) {
       console.log(error);
     } finally {

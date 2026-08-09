@@ -21,7 +21,10 @@ const NoteCard: FC<NoteCardProps> = ({
         <h2 className="card-title">{note.title}</h2>
         <p>{note.content}</p>
         <div className="card-actions justify-end">
-          <button className="btn btn-sm btn-warning" onClick={() => onEditNote(note)}>
+          <button
+            className="btn btn-sm btn-warning"
+            onClick={() => onEditNote(note)}
+          >
             <SquarePen />
           </button>
           <button

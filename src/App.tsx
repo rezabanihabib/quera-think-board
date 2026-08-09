@@ -29,6 +29,21 @@ function App() {
     fetchNotes();
   }, []);
 
+  const handleFormSuccess = (savedNote: Note) => {
+    setNotes((prev) => {
+      const exists = prev.some((n) => n.id === savedNote.id);
+      if (exists) {
+        return prev.map((n) => (n.id === savedNote.id ? savedNote : n));
+      }
+      return [savedNote, ...prev];
+    });
+    setSelectedNote(null);
+  };
+
+  const handleDeleteNote = (id: string) => {
+    setNotes((prev) => prev.filter((note) => note.id !== id));
+  };
+
   if (isFetchingNotes) return <Loading />;
 
   return (
@@ -39,13 +54,12 @@ function App() {
           <NoteForm
             key={selectedNote?.id ?? "new"}
             note={selectedNote}
-            onSuccess={() => {
-              setSelectedNote(null);
-            }}
+            onSuccess={handleFormSuccess}
           />
           <NoteList
             notes={notes}
             onEditNote={(note) => setSelectedNote(note)}
+            onDeleteNote={handleDeleteNote}
           />
         </Container>
       </main>

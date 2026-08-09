@@ -7,17 +7,17 @@ import { axiosInstance } from "../../lib/axios";
 interface NoteListProps {
   notes: Note[];
   onEditNote: (note: Note) => void;
+  onDeleteNote: (id: string) => void;
 }
 
-const NoteList: FC<NoteListProps> = ({ notes, onEditNote }) => {
-  const [notesData, setNotesData] = useState<Note[]>(notes);
+const NoteList: FC<NoteListProps> = ({ notes, onEditNote, onDeleteNote }) => {
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const handleDeleteNote = async (id: string) => {
     setDeletingId(id);
     try {
       await axiosInstance.delete(`api/notes/${id}`);
-      setNotesData((prev) => prev.filter((note) => note.id !== id));
+      onDeleteNote(id);
     } catch (error) {
       console.log(error);
     } finally {
@@ -28,7 +28,7 @@ const NoteList: FC<NoteListProps> = ({ notes, onEditNote }) => {
   return (
     <section>
       <Container className="my-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-3 gap-y-5">
-        {notesData.map((note) => (
+        {notes.map((note) => (
           <NoteCard
             key={note.id}
             note={note}
