@@ -1,12 +1,18 @@
-import { SquarePen, Trash } from "lucide-react";
+import { LoaderCircle, SquarePen, Trash } from "lucide-react";
 import type { Note } from "../../types/note.type";
 import type { FC } from "react";
 
 interface NoteCardProps {
   note: Note;
+  isDeletingNote: boolean;
+  handleDeleteNote;
 }
 
-const NoteCard: FC<NoteCardProps> = ({ note }) => {
+const NoteCard: FC<NoteCardProps> = ({
+  note,
+  isDeleteingNote,
+  handleDeleteNote,
+}) => {
   return (
     <div className="card card-border bg-base-300">
       <div className="card-body">
@@ -16,8 +22,15 @@ const NoteCard: FC<NoteCardProps> = ({ note }) => {
           <button className="btn btn-sm btn-warning">
             <SquarePen />
           </button>
-          <button className="btn btn-sm btn-error">
-            <Trash />
+          <button
+            onClick={() => handleDeleteNote(note)}
+            className="btn btn-sm btn-error"
+          >
+            {isDeleteingNote ? (
+              <LoaderCircle className="animate-spin" />
+            ) : (
+              <Trash />
+            )}
           </button>
         </div>
       </div>
