@@ -12,7 +12,7 @@ const NoteList: FC<NoteListProps> = ({ notes }) => {
     <section>
       <Container className="my-5">
         {notes.map((note) => (
-          <NoteCard note={note} />
+          <NoteCard key={note.id} note={note} />
         ))}
       </Container>
     </section>
