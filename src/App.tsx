@@ -12,7 +12,6 @@ function App() {
   const [notes, setNotes] = useState<Note[]>([]);
   const [isFetchingNotes, setIsFetchingNotes] = useState<boolean>(false);
 
-
   useEffect(() => {
     const fetchNotes = async () => {
       setIsFetchingNotes(true);
@@ -36,10 +35,12 @@ function App() {
       <Header />
       <main>
         <Container>
-          <NoteForm />
-          <NoteList
-            notes={notes}
+          <NoteForm
+            onSuccess={() => {
+              //
+            }}
           />
+          <NoteList notes={notes} />
         </Container>
       </main>
     </>
