@@ -1,3 +1,4 @@
+import { SquarePen, Trash } from "lucide-react";
 import type { Note } from "../../types/note.type";
 import type { FC } from "react";
 
@@ -12,7 +13,12 @@ const NoteCard: FC<NoteCardProps> = ({ note }) => {
         <h2 className="card-title">{note.title}</h2>
         <p>{note.content}</p>
         <div className="card-actions justify-end">
-          <button className="btn btn-primary">Buy Now</button>
+          <button className="btn btn-warning">
+            <SquarePen />
+          </button>
+          <button className="btn btn-error">
+            <Trash />
+          </button>
         </div>
       </div>
     </div>
