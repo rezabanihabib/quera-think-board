@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import SunIcon from "./icons/SunIcon";
 import MoonIcon from "./icons/MoonIcon";
 
+
 const ThemeToggle = () => {
   const [theme, setTheme] = useState<string>(() => {
     const saved = localStorage.getItem("theme");
