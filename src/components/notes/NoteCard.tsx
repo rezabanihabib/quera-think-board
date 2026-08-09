@@ -8,7 +8,7 @@ interface NoteCardProps {
 
 const NoteCard: FC<NoteCardProps> = ({ note }) => {
   return (
-    <div className="card card-border bg-base-200">
+    <div className="card card-border bg-base-300">
       <div className="card-body">
         <h2 className="card-title">{note.title}</h2>
         <p>{note.content}</p>
