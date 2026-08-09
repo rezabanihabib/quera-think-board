@@ -11,23 +11,7 @@ import NoteForm from "./components/notes/NoteForm";
 function App() {
   const [notes, setNotes] = useState<Note[]>([]);
   const [isFetchingNotes, setIsFetchingNotes] = useState<boolean>(false);
-  // ----------------- DELETE ----------------- //
-  const [selectedNote, setSelectedNote] = useState<Note>();
-  const [isDeleteingNote, setIsDeleteingNote] = useState<boolean>(false);
 
-  const handleDeleteNote = async (note: Note) => {
-    setSelectedNote(note);
-    setIsDeleteingNote(true);
-    try {
-      await axiosInstance.delete(`api/notes/${note.id}`);
-      setNotes(notes.filter((n) => n.id !== note.id));
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsDeleteingNote(false);
-      setSelectedNote(undefined);
-    }
-  };
 
   useEffect(() => {
     const fetchNotes = async () => {
@@ -55,8 +39,6 @@ function App() {
           <NoteForm />
           <NoteList
             notes={notes}
-            isDeleteingNote={isDeleteingNote}
-            handleDeleteNote={handleDeleteNote}
           />
         </Container>
       </main>

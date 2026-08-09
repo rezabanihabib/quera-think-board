@@ -4,13 +4,13 @@ import type { FC } from "react";
 
 interface NoteCardProps {
   note: Note;
-  isDeletingNote: boolean;
-  handleDeleteNote;
+  deletingId: string | null;
+  handleDeleteNote: (id: string) => Promise<void>;
 }
 
 const NoteCard: FC<NoteCardProps> = ({
   note,
-  isDeleteingNote,
+  deletingId,
   handleDeleteNote,
 }) => {
   return (
@@ -23,10 +23,11 @@ const NoteCard: FC<NoteCardProps> = ({
             <SquarePen />
           </button>
           <button
-            onClick={() => handleDeleteNote(note)}
+            onClick={() => handleDeleteNote(note.id)}
             className="btn btn-sm btn-error"
+            disabled={deletingId === note.id}
           >
-            {isDeleteingNote ? (
+            {deletingId === note.id ? (
               <LoaderCircle className="animate-spin" />
             ) : (
               <Trash />
