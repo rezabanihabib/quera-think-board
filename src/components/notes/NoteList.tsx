@@ -6,9 +6,10 @@ import { axiosInstance } from "../../lib/axios";
 
 interface NoteListProps {
   notes: Note[];
+  onEditNote: (note: Note) => void;
 }
 
-const NoteList: FC<NoteListProps> = ({ notes }) => {
+const NoteList: FC<NoteListProps> = ({ notes, onEditNote }) => {
   const [notesData, setNotesData] = useState<Note[]>(notes);
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
@@ -31,6 +32,7 @@ const NoteList: FC<NoteListProps> = ({ notes }) => {
           <NoteCard
             key={note.id}
             note={note}
+            onEditNote={onEditNote}
             deletingId={deletingId}
             handleDeleteNote={handleDeleteNote}
           />

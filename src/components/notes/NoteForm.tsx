@@ -5,7 +5,7 @@ import type { Note } from "../../types/note.type";
 import { LoaderCircle } from "lucide-react";
 
 interface NoteFormProps {
-  note?: Note;
+  note?: Note | null;
   onSuccess?: () => void;
 }
 
@@ -17,8 +17,8 @@ const NoteForm: FC<NoteFormProps> = ({ note, onSuccess }) => {
   const [isSubmitingForm, setIsSubmitingForm] = useState<boolean>(false);
 
   const handleSubmit = async (e) => {
-    setIsSubmitingForm(true);
     e.preventDefault();
+    setIsSubmitingForm(true);
 
     try {
       if (note) {

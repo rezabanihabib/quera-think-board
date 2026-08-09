@@ -4,12 +4,14 @@ import type { FC } from "react";
 
 interface NoteCardProps {
   note: Note;
+  onEditNote: (note: Note) => void;
   deletingId: string | null;
   handleDeleteNote: (id: string) => Promise<void>;
 }
 
 const NoteCard: FC<NoteCardProps> = ({
   note,
+  onEditNote,
   deletingId,
   handleDeleteNote,
 }) => {
@@ -19,7 +21,7 @@ const NoteCard: FC<NoteCardProps> = ({
         <h2 className="card-title">{note.title}</h2>
         <p>{note.content}</p>
         <div className="card-actions justify-end">
-          <button className="btn btn-sm btn-warning">
+          <button className="btn btn-sm btn-warning" onClick={() => onEditNote(note)}>
             <SquarePen />
           </button>
           <button

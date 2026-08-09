@@ -11,6 +11,7 @@ import NoteForm from "./components/notes/NoteForm";
 function App() {
   const [notes, setNotes] = useState<Note[]>([]);
   const [isFetchingNotes, setIsFetchingNotes] = useState<boolean>(false);
+  const [selectedNote, setSelectedNote] = useState<Note | null>(null);
 
   useEffect(() => {
     const fetchNotes = async () => {
@@ -36,11 +37,16 @@ function App() {
       <main>
         <Container>
           <NoteForm
+            key={selectedNote?.id ?? "new"}
+            note={selectedNote}
             onSuccess={() => {
-              //
+              setSelectedNote(null);
             }}
           />
-          <NoteList notes={notes} />
+          <NoteList
+            notes={notes}
+            onEditNote={(note) => setSelectedNote(note)}
+          />
         </Container>
       </main>
     </>
