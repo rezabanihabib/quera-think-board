@@ -1,4 +1,5 @@
-import Header from "./layouts/Header";
+import Header from "./components/ui/Header";
+
 
 function App() {
   return (
